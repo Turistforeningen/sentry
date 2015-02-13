@@ -4,6 +4,8 @@ This is a production ready setup of
 [Sentry](https://github.com/getsentry/sentry) with Postgres and Redis using
 [Docker Compose](https://github.com/docker/fig).
 
+![Docker Compose container overview](https://docs.google.com/drawings/d/1OB0R9QUec7hytx73EYHJcmLzj2m6bMNWnNv-nePAg24/pub?w=766&h=216)
+
 ## What are the requirements?
 
 * [Docker](https://github.com/docker/docker) >= `v1.3`
