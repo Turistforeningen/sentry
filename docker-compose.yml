@@ -27,11 +27,5 @@ www:
     - data
   entrypoint: sentry
   command: start --noinput
-  environment:
-    - SECRET_KEY
-    - SERVER_EMAIL
-    - SENTRY_URL_PREFIX
-    - EMAIL_HOST
-    - EMAIL_PORT
-    - EMAIL_HOST_USER
-    - EMAIL_HOST_PASSWORD
+  env_file:
+    - private-data/sentry/environment.sh
