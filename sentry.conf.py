@@ -39,11 +39,12 @@ SENTRY_REDIS_OPTIONS = {
     }
 }
 
-# EMAIL_HOST = 'localhost'
-# EMAIL_HOST_PASSWORD = ''
-# EMAIL_HOST_USER = ''
-# EMAIL_PORT = 25
-# EMAIL_USE_TLS = False
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = os.environ.get('EMAIL_HOST', '')
+EMAIL_PORT = os.environ.get('EMAIL_PORT', '')
+EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER', '')
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD', '')
+EMAIL_USE_TLS = True
 
 # The email address to send on behalf of
 SENTRY_URL_PREFIX = os.environ.get('SENTRY_URL_PREFIX') or 'http://example.com'
