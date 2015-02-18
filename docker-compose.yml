@@ -30,5 +30,5 @@ www:
   entrypoint: sentry
   command: start --noinput
   env_file:
-    - private-data/sentry/environment.sh
+    - private-data/environment.sh
   restart: always
