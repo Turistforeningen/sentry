@@ -10,11 +10,13 @@ redis:
   image: redis:2.8
   volumes_from:
     - data
+  restart: on-failure
 
 postgres:
   image: postgres:9.4
   volumes_from:
     - data
+  restart: on-failure
 
 www:
   build: .
@@ -29,3 +31,4 @@ www:
   command: start --noinput
   env_file:
     - private-data/sentry/environment.sh
+  restart: always
