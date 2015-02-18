@@ -10,13 +10,13 @@ redis:
   image: redis:2.8
   volumes_from:
     - data
-  restart: on-failure
+  restart: always
 
 postgres:
   image: postgres:9.4
   volumes_from:
     - data
-  restart: on-failure
+  restart: always
 
 www:
   build: .
