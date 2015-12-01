@@ -7,7 +7,7 @@ data:
   entrypoint: /bin/echo
 
 redis:
-  image: redis:2.8
+  image: redis:3.0
   volumes_from:
     - data
   restart: always
@@ -23,12 +23,42 @@ www:
   ports:
     - "8080"
   links:
-    - postgres
     - redis
+    - postgres
   volumes_from:
     - data
-  entrypoint: sentry
-  command: start --noinput
   env_file:
     - private-data/environment.sh
+  environment:
+    - VIRTUAL_HOST=sentry.dnt.privat
+    - VIRTUAL_PORT=8080
+  command: sentry start --noinput
+  restart: always
+
+celery-beat:
+  build: .
+  links:
+    - redis
+    - postgres
+  volumes_from:
+    - data
+  env_file:
+    - private-data/environment.sh
+  environment:
+    - C_FORCE_ROOT=True
+  command: sentry celery beat
+  restart: always
+
+celery-worker:
+  build: .
+  links:
+    - redis
+    - postgres
+  volumes_from:
+    - data
+  env_file:
+    - private-data/environment.sh
+  environment:
+    - C_FORCE_ROOT=True
+  command: sentry celery worker
   restart: always

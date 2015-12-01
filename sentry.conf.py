@@ -4,7 +4,7 @@ from sentry.conf.server import *
 import os
 
 CONF_ROOT = os.path.dirname(__file__)
-TIME_ZONE = 'Europe/Oslo'
+TIME_ZONE = os.environ.get('TIME_ZONE') or 'UTC'
 
 # Remeber to set the SECRET_KEY environment variable when putting this into
 # production so no one can spoofe your sessions. Changing this will cause your
@@ -30,6 +30,8 @@ DATABASES = {
     }
 }
 
+BROKER_URL = 'redis://redis:6379/0'
+SENTRY_CACHE = 'sentry.cache.redis.RedisCache'
 SENTRY_REDIS_OPTIONS = {
     'hosts': {
         0: {
@@ -49,6 +51,7 @@ EMAIL_USE_TLS = True
 # The email address to send on behalf of
 SENTRY_URL_PREFIX = os.environ.get('SENTRY_URL_PREFIX') or 'http://example.com'
 SERVER_EMAIL = os.environ.get('SERVER_EMAIL') or 'root@localhost'
+SENTRY_ADMIN_EMAIL = os.environ.get('SENTRY_ADMIN_EMAIL') or 'admin@localhost'
 
 SENTRY_WEB_HOST = '0.0.0.0'
 SENTRY_WEB_PORT = 8080
@@ -61,5 +64,6 @@ SENTRY_WEB_OPTIONS = {
 # If you're using a reverse proxy, you should enable the X-Forwarded-Proto
 # and X-Forwarded-Host headers, and uncomment the following settings
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
 USE_X_FORWARDED_HOST = True
-
