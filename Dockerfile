@@ -14,7 +14,10 @@ RUN apt-get -qq update && DEBIAN_FRONTEND=noninteractive \
 
 RUN pip install -U \
   sentry[postgres] \
+  sentry-github \
+  sentry-jira \
   sentry-slack \
+  sentry-webhooks
 
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /wheels/*
 
