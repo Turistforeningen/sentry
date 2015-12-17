@@ -1,3 +1,3 @@
-[submodule "private-data"]
-	path = private-data
+[submodule "secrets"]
+	path = secrets
 	url = git.hw.dnt.no:~/repos/sentry/
